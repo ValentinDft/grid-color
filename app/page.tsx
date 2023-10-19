@@ -1,9 +1,10 @@
 'use client';
 import Input from '@/components/Input/Input';
 import styles from './page.module.scss';
+import ButtonSubmitForm from '@/components/ButtonSubmitForm/ButtonSubmitForm';
 
 export default function Home() {
-  const oui = (e: any) => {
+  const submitForm = (e: any) => {
     e.preventDefault();
     console.log(e.target.email.value);
   };
@@ -11,9 +12,12 @@ export default function Home() {
     <main className={styles['container']}>
       <h1>Welcome to Grid color</h1>
 
-      <form onSubmit={oui}>
+      <form onSubmit={submitForm} className={styles['form']}>
         <Input type='email' placeholder='Your email' id='email' />
-        <button type='submit'>go</button>
+        <ButtonSubmitForm />
+        <span className={styles['text-info']}>
+          You will receive a magic link
+        </span>
       </form>
     </main>
   );
