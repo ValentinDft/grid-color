@@ -1,3 +1,4 @@
+import { colorType } from '@/components/Grid/HeaderGrid/HeaderGrid';
 import { create } from 'zustand';
 
 type userStoreType = {
@@ -15,12 +16,12 @@ export const useUserStore = create<userStoreType>((set) => ({
 }));
 
 type gridStoreType = {
-  selectedColor: string | null;
-  setColor: (color: string) => void;
+  selectedColor: colorType;
+  setColor: (color: colorType) => void;
 };
 
 export const useGridStore = create<gridStoreType>((set) => ({
-  selectedColor: null,
+  selectedColor: 'orange',
   setColor: (color) => {
     set({ selectedColor: color });
   },
