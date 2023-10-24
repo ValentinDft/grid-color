@@ -1,0 +1,30 @@
+.header-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .bullet-color {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    border: 1px solid grey;
+    transition: all 0.2s ease-in-out;
+
+    &-active {
+      @extend .bullet-color;
+      border: 1px solid black;
+      transform: scale(1.2);
+    }
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  .list-color {
+    display: flex;
+    gap: 10px;
+  }
+}

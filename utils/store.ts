@@ -13,3 +13,15 @@ export const useUserStore = create<userStoreType>((set) => ({
     set({ email, id });
   },
 }));
+
+type gridStoreType = {
+  selectedColor: string | null;
+  setColor: (color: string) => void;
+};
+
+export const useGridStore = create<gridStoreType>((set) => ({
+  selectedColor: null,
+  setColor: (color) => {
+    set({ selectedColor: color });
+  },
+}));

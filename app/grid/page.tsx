@@ -1,5 +1,7 @@
+import GridColor from '@/components/Grid/GridColor';
 import HeaderGrid from '@/components/Grid/HeaderGrid/HeaderGrid';
 import { Metadata } from 'next';
+import styles from './page.module.scss';
 
 export const metadata: Metadata = {
   title: 'Grid Color',
@@ -8,8 +10,9 @@ export const metadata: Metadata = {
 
 const Grid = () => {
   return (
-    <div>
+    <div className={styles['container']}>
       <HeaderGrid />
+      <GridColor />
     </div>
   );
 };
