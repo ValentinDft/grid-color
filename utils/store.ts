@@ -1,14 +1,14 @@
 import { create } from 'zustand';
 
 type userStoreType = {
-  email: string;
-  id: string;
+  email: string | null;
+  id: string | null;
   setUser: (email: string, id: string) => void;
 };
 
 export const useUserStore = create<userStoreType>((set) => ({
-  email: '',
-  id: '',
+  email: null,
+  id: null,
   setUser: (email, id) => {
     set({ email, id });
   },

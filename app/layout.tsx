@@ -11,9 +11,14 @@ export default function RootLayout({
 }) {
   const { setUser } = useUserStore();
 
-  useEffect(() => {
-    checkUserLog().then((res) => setUser(res?.email!, res?.id!));
-  }, []);
+  // useEffect(() => {
+  //   try {
+  //     checkUserLog().then((res) => setUser(res?.email!, res?.id!));
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  //   // checkUserLog().then((res) => setUser(res?.email!, res?.id!));
+  // }, []);
 
   return (
     <html lang='en'>
