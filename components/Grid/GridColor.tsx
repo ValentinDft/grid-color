@@ -1,8 +1,10 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './grid-color.module.scss';
 import { useGridStore } from '@/utils/store';
 import { colorType } from './HeaderGrid/HeaderGrid';
+import { checkGrid, updateGrid } from '@/utils/getGrid';
+import supabase from '@/utils/database';
 
 type squareType = {
   color: colorType;
@@ -10,54 +12,61 @@ type squareType = {
 };
 
 const GridColor = () => {
-  const { selectedColor } = useGridStore();
-  const [squareColor, setSquareColor] = useState<colorType>();
-  const [id, setId] = useState<number>();
+  const { selectedColor, setWaiting, waiting } = useGridStore();
+  const [dataSquareColor, setDataSquareColor] = useState<squareType[]>([]);
 
   const changeColor = (color: colorType, id: number) => {
-    setSquareColor(color);
-    setId(id);
+    updateGrid(id, color);
   };
 
-  const dataSquareColor: Array<squareType> = [
-    { color: 'red', id: 1 },
-    { color: 'orange', id: 2 },
-    { color: 'blue', id: 3 },
-    { color: 'green', id: 4 },
-    { color: 'black', id: 5 },
-    { color: 'white', id: 6 },
-  ];
+  const grid = supabase
+    .channel('grid-update-channel')
+    .on(
+      'postgres_changes',
+      { event: 'UPDATE', schema: 'public', table: 'grid' },
+      (payload) => {
+        setDataSquareColor(
+          dataSquareColor.map((item) => {
+            if (item.id === payload.new.id_grid) {
+              return {
+                ...item,
+                color: payload.new.color,
+              };
+            }
+            return item;
+          })
+        );
+      }
+    )
+    .subscribe();
+
+  useEffect(() => {
+    checkGrid().then((res) => {
+      res?.map((square) => {
+        setDataSquareColor((prev) => [
+          ...prev,
+          { color: square.color, id: square.id_grid },
+        ]);
+      });
+    });
+  }, []);
+
   return (
     <div className={styles['grid-container']}>
       <div className={styles['grid-collumn']}>
         {dataSquareColor.map((square: squareType) => {
-          if (squareColor && id === square.id) {
-            return (
-              <div
-                key={square.id}
-                style={{
-                  width: 20,
-                  height: 20,
-                  background: squareColor,
-                }}
-                className={styles['square']}
-                onClick={() => changeColor(selectedColor, square.id)}
-              ></div>
-            );
-          } else {
-            return (
-              <div
-                key={square.id}
-                style={{
-                  width: 20,
-                  height: 20,
-                  background: square.color,
-                }}
-                className={styles['square']}
-                onClick={() => changeColor(selectedColor, square.id)}
-              ></div>
-            );
-          }
+          return (
+            <div
+              key={square.id}
+              style={{
+                width: 20,
+                height: 20,
+                background: square.color,
+              }}
+              className={styles['square']}
+              onClick={() => changeColor(selectedColor, square.id)}
+            ></div>
+          );
         })}
       </div>
     </div>

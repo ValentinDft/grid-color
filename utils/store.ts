@@ -17,12 +17,18 @@ export const useUserStore = create<userStoreType>((set) => ({
 
 type gridStoreType = {
   selectedColor: colorType;
+  waiting: boolean;
   setColor: (color: colorType) => void;
+  setWaiting: (value: boolean) => void;
 };
 
 export const useGridStore = create<gridStoreType>((set) => ({
   selectedColor: 'orange',
+  waiting: false,
   setColor: (color) => {
     set({ selectedColor: color });
+  },
+  setWaiting(value) {
+    set({ waiting: value });
   },
 }));
