@@ -1,7 +1,8 @@
-import GridColor from '@/components/Grid/GridColor';
-import HeaderGrid from '@/components/Grid/HeaderGrid/HeaderGrid';
+import GridColor from '@/app/grid/_components/Grid/GridColor';
+import HeaderGrid from '@/app/grid/_components/Grid/HeaderGrid/HeaderGrid';
 import { Metadata } from 'next';
 import styles from './page.module.scss';
+import Waiting from '@/app/grid/_components/Waiting/Waiting';
 
 export const metadata: Metadata = {
   title: 'Grid Color',
@@ -13,6 +14,7 @@ const Grid = () => {
     <div className={styles['container']}>
       <HeaderGrid />
       <GridColor />
+      <Waiting />
     </div>
   );
 };

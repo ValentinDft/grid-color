@@ -1,4 +1,4 @@
-import { colorType } from '@/components/Grid/HeaderGrid/HeaderGrid';
+import { colorType } from '@/app/grid/_components/Grid/HeaderGrid/HeaderGrid';
 import { create } from 'zustand';
 
 type userStoreType = {

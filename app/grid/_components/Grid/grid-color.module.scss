@@ -1,0 +1,18 @@
+.grid-container {
+  display: flex;
+
+  .grid-collumn {
+    border: 1px solid grey;
+    display: grid;
+    grid-template-rows: repeat(6, 20px);
+    grid-template-columns: repeat(6, 20px);
+    flex-direction: column;
+  }
+
+  .square {
+    &:hover {
+      transform: scale(1.01);
+      border: 1px solid black;
+    }
+  }
+}

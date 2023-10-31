@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import styles from './grid-color.module.scss';
 import { useGridStore } from '@/utils/store';
 import { colorType } from './HeaderGrid/HeaderGrid';
-import { checkGrid, updateGrid } from '@/utils/getGrid';
+import { checkGrid, setSomeData, updateGrid } from '@/utils/getGrid';
 import supabase from '@/utils/database';
 
 type squareType = {
@@ -16,10 +16,11 @@ const GridColor = () => {
   const [dataSquareColor, setDataSquareColor] = useState<squareType[]>([]);
 
   const changeColor = (color: colorType, id: number) => {
-    updateGrid(id, color);
+    !waiting && updateGrid(id, color);
+    setWaiting(true);
   };
 
-  const grid = supabase
+  supabase
     .channel('grid-update-channel')
     .on(
       'postgres_changes',
@@ -62,6 +63,7 @@ const GridColor = () => {
                 width: 20,
                 height: 20,
                 background: square.color,
+                cursor: waiting ? 'not-allowed' : 'pointer',
               }}
               className={styles['square']}
               onClick={() => changeColor(selectedColor, square.id)}
