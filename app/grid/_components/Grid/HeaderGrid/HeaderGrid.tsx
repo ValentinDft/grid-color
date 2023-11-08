@@ -18,7 +18,7 @@ const HeaderGrid = () => {
 
   return (
     <div className={styles['header-container']}>
-      <h3>You are connect as {email}</h3>
+      <h3>Welcome</h3>
 
       <p>Choose your color !</p>
       <div className={styles['list-color']}>

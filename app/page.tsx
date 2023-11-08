@@ -1,6 +1,6 @@
-import Login from '@/components/Login/Login';
 import styles from './page.module.scss';
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Grid Color',
@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className={styles['container']}>
-      <h1>Welcome to Grid color</h1>
-
-      <Login />
+      <Link href={'/grid'}>
+        <h1>Go to the grid</h1>
+      </Link>
     </main>
   );
 }
