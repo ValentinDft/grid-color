@@ -5,7 +5,6 @@ import styles from './header-grid.module.scss';
 export type colorType = 'orange' | 'black' | 'white' | 'red' | 'blue' | 'green';
 
 const HeaderGrid = () => {
-  const { email } = useUserStore();
   const { setColor, selectedColor } = useGridStore();
   const dataColor: Array<colorType> = [
     'orange',
@@ -18,9 +17,9 @@ const HeaderGrid = () => {
 
   return (
     <div className={styles['header-container']}>
-      <h3>Welcome</h3>
+      <h1>Welcome to Grid color</h1>
 
-      <p>Choose your color !</p>
+      <p>Choose your color and try to draw something !</p>
       <div className={styles['list-color']}>
         {dataColor.map((color: colorType) => (
           <div

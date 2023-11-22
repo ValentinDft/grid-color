@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import styles from './grid-color.module.scss';
 import { useGridStore } from '@/utils/store';
 import { colorType } from './HeaderGrid/HeaderGrid';
-import { checkGrid, setSomeData, updateGrid } from '@/utils/getGrid';
+import { checkGrid, updateGrid } from '@/utils/getGrid';
 import supabase from '@/utils/database';
 
 type squareType = {

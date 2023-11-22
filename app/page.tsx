@@ -1,6 +1,8 @@
 import styles from './page.module.scss';
 import { Metadata } from 'next';
-import Link from 'next/link';
+import HeaderGrid from '../components/Grid/HeaderGrid/HeaderGrid';
+import GridColor from '../components/Grid/GridColor';
+import Waiting from '../components/Waiting/Waiting';
 
 export const metadata: Metadata = {
   title: 'Grid Color',
@@ -10,9 +12,9 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className={styles['container']}>
-      <Link href={'/grid'}>
-        <h1>Go to the grid</h1>
-      </Link>
+      <HeaderGrid />
+      <GridColor />
+      <Waiting />
     </main>
   );
 }
